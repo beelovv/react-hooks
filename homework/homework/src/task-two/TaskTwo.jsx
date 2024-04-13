@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo, useCallback, useRef } from 'react'
 import RenderCounter from './render-counter/RenderCounter';
 import './TaskTwo.css';
 
@@ -13,30 +13,30 @@ export default function TaskTwo() {
     )
 }
 
-const Root = () => {
+const Root = memo(() => {
     const [value, setValue] = React.useState('')
-    const handleChange = (event) => {
+    const handleChange = useCallback ( event => {
         setValue(event.target.value)
-    }
+    },[])
     return (
         <form className="form-container">
             Введенное значение: {value}
-            {/*<RenderCounter />*/}
+            {<RenderCounter />}
             <Input onChange={handleChange} />
         </form>
     )
-}
+})
 
-const Input = ({ onChange }) => {
+const Input = memo(({ onChange }) => {
     return (
         <div className="input-container">
             <input type="text" className="input-field" name="value" onChange={onChange} />
-            {/*<RenderCounter />*/}
+            {<RenderCounter />}
         </div>
     )
-}
+})
 
 function useUpdate() {
     const [, setCount] = React.useState(0)
-    return () => { setCount(counter => counter + 1) }
+    return useCallback(() => { setCount(counter => counter + 1) },[])
 }

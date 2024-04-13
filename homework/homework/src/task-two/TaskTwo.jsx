@@ -7,7 +7,7 @@ export default function TaskTwo() {
     return (
         <div className="TaskTwo">
             <button onClick={update}>Обновить компонент</button>
-            {/*<RenderCounter />*/}
+            {<RenderCounter />}
             <Root />
         </div>
     )
